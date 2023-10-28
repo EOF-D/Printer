@@ -1,18 +1,17 @@
-template: "@define" CNAME [stmt+]
+template: "@define" CNAME "-> [" STRING "]" [stmt+]
 stmt: struct
     | append
-    | set
+    | set_var
 
 struct: "struct = [" [_cs_list{STRING}] "]"
-append: "-> " CNAME "." CNAME "${" [_cs_list{CNAME}] "}"
-set: CNAME "=" "{" [_stmt+] "}"
+append: "@type(" CNAME ")" "-> " CNAME "(" CNAME ")" "= {" [_cs_list{CNAME}] "}"
+set_var: CNAME "= {" ANY "}"
 
-_raw: /.*/
+ANY: /[^{}]+/
 _cs_list{item}: item [("," item)* | (", " item)*] ","?
 
 %import common.CNAME
 %import python.STRING
-%import python.stmt -> _stmt
 
 %import common.CPP_COMMENT
 %import common.WS

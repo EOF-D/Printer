@@ -1,15 +1,22 @@
-@define project
+@define project -> ["tests/"]
     code = {
         __version__ = '0.1.0'
         __author__ = 'andy'
+
+        def main() -> None:
+            print(__version__)
+        
+        if __name__ == "__main__":
+            main()
     }
 
-    // struct = [
-    //     "tests/",
-    //     "docs/",
-    //     "project/"
-    // ]
+    struct = [
+        "tests/",
+        "docs/",
+        "project/"
+    ]
 
-    // -> project.__init__ = {
-    //     code
-    // }
+    @type(py)
+    -> project(__init__) = {
+        code
+    }
