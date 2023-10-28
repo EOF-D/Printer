@@ -1,12 +1,14 @@
 from __future__ import annotations
 
-import argparse, os
-import rich
+import argparse
+import os
 
+import rich
 from lark import Lark
 
+from printer import __author__, __license__, __version__
+
 from .parser import PrinterTransformer
-from printer import __version__, __author__, __license__
 
 
 def main() -> None:

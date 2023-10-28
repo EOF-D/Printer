@@ -3,7 +3,8 @@ from __future__ import annotations
 from textwrap import dedent
 
 from lark import Transformer, v_args
-from ..nodes import Template, Node, SetVar, Struct, Append
+
+from ..nodes import Append, Node, SetVar, Struct, Template
 
 __all__ = ("PrinterTransformer",)
 
