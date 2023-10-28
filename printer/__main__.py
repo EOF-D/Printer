@@ -12,6 +12,7 @@ from printer import __version__, __author__, __license__
 def main() -> None:
     parser = argparse.ArgumentParser(prog="printer")
     parser.add_argument("file", type=argparse.FileType("r"))
+    parser.add_argument("-d", "--debug", action="store_true")
     parser.add_argument(
         "-v",
         "--version",
@@ -28,7 +29,9 @@ def main() -> None:
             parser = Lark(fp.read(), start="template", lexer="dynamic_complete")
 
         tree = PrinterTransformer().transform(parser.parse(args.file.read()))
-        rich.inspect(tree)
+
+        if args.debug:
+            rich.inspect(tree)
 
 
 if __name__ == "__main__":
