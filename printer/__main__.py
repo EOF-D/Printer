@@ -4,6 +4,8 @@ import argparse, os
 import rich
 
 from lark import Lark
+
+from .parser import PrinterTransformer
 from printer import __version__, __author__, __license__
 
 
@@ -23,9 +25,10 @@ def main() -> None:
         path = os.path.dirname(__file__)
 
         with open(f"{path}/parser/grammar.lark", "r") as fp:
-            parser = Lark(fp.read(), start="template", parser="lalr")
-        
-        rich.inspect(parser.parse(args.file.read()))
+            parser = Lark(fp.read(), start="template", lexer="dynamic_complete")
+
+        tree = PrinterTransformer().transform(parser.parse(args.file.read()))
+        rich.inspect(tree)
 
 
 if __name__ == "__main__":
