@@ -1,0 +1,21 @@
+template: "@define" CNAME [stmt+]
+stmt: struct
+    | append
+    | set
+
+struct: "struct = [" [_cs_list{STRING}] "]"
+append: "-> " CNAME "." CNAME "${" [_cs_list{CNAME}] "}"
+set: CNAME "=" "{" [_stmt+] "}"
+
+_raw: /.*/
+_cs_list{item}: item [("," item)* | (", " item)*] ","?
+
+%import common.CNAME
+%import python.STRING
+%import python.stmt -> _stmt
+
+%import common.CPP_COMMENT
+%import common.WS
+
+%ignore CPP_COMMENT
+%ignore WS

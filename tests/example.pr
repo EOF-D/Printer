@@ -1,0 +1,15 @@
+@define project
+    code = {
+        __version__ = '0.1.0'
+        __author__ = 'andy'
+    }
+
+    // struct = [
+    //     "tests/",
+    //     "docs/",
+    //     "project/"
+    // ]
+
+    // -> project.__init__ = {
+    //     code
+    // }
