@@ -1,22 +1,27 @@
 @define(project) -> ["tests/"]
-    code = {
-        __version__ = '0.1.0'
-        __author__ = 'andy'
-
-        def main() -> None:
-            print(__version__)
-
-        if __name__ == "__main__":
-            main()
-    }
-
     @struct(
         "tests/",
         "docs/",
-        "project/"
+        "project",
     )
-
-    @filetype(py)
-    -> project(__init__) = {
-        code
+    
+    future = {from __future__ import annotations}
+    imports = {
+        from argparse import ArgumentParser
+        from project import __version__, __author__
     }
+
+    meta = {
+        __version__ = "0.1.0"
+        __author__ = "andy"
+    }
+
+	@filetype(py)
+	-> project(__init__) = {
+		meta
+	}
+
+	@filetype(py)
+	-> project(__main__) = {
+		imports
+	}
