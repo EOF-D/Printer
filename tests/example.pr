@@ -12,6 +12,7 @@
     }
 
     main = {
+
         def main() -> None:
             parser = ArgumentParser()
             parser.add_argument(
