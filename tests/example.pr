@@ -1,4 +1,4 @@
-@define project -> ["tests/"]
+@define(project) -> ["tests/"]
     code = {
         __version__ = '0.1.0'
         __author__ = 'andy'
@@ -10,13 +10,13 @@
             main()
     }
 
-    @struct = [
+    @struct(
         "tests/",
         "docs/",
         "project/"
-    ]
+    )
 
-    @type(py)
+    @filetype(py)
     -> project(__init__) = {
         code
     }
