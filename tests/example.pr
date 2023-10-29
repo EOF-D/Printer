@@ -4,11 +4,25 @@
         "docs/",
         "project",
     )
-    
+
     future = {from __future__ import annotations}
     imports = {
         from argparse import ArgumentParser
         from project import __version__, __author__
+    }
+
+    main = {
+        def main() -> None:
+            parser = ArgumentParser()
+            parser.add_argument(
+                "-v",
+                "--version",
+                action="version",
+                version=__version__,
+            )
+
+        if __name__ == "__main__":
+            main()
     }
 
     meta = {
@@ -16,12 +30,13 @@
         __author__ = "andy"
     }
 
-	@filetype(py)
-	-> project(__init__) = {
-		meta
-	}
+    @filetype(py)
+    -> project(__init__) = {
+        meta
+    }
 
-	@filetype(py)
-	-> project(__main__) = {
-		imports
-	}
+    @filetype(py)
+    -> project(__main__) = {
+        imports,
+        main
+    }
