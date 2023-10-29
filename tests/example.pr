@@ -5,12 +5,12 @@
 
         def main() -> None:
             print(__version__)
-        
+
         if __name__ == "__main__":
             main()
     }
 
-    struct = [
+    @struct = [
         "tests/",
         "docs/",
         "project/"

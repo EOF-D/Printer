@@ -3,7 +3,7 @@ stmt: struct
     | append
     | set_var
 
-struct: "struct = [" [_cs_list{STRING}] "]"
+struct: "@struct = [" [_cs_list{STRING}] "]"
 append: "@type(" CNAME ")" "-> " CNAME "(" CNAME ")" "= {" [_cs_list{CNAME}] "}"
 set_var: CNAME "= {" ANY "}"
 
