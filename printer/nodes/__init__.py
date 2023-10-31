@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import os
 from typing import Any
-
+from urllib import request
+ 
+from requests import get
 from attrs import define, field
 
-__all__ = ("Template",)
+__all__ = ("Template", "SetVar", "Struct", "Append", "Scrape")
 
 
 @define()
@@ -64,3 +66,16 @@ class Append(Node):
         with open(path, "a") as fp:
             for line in self.to_append:
                 fp.write(parent.lookup[line])
+
+
+@define(slots=True)
+class Scrape(Node):
+    name: str = field()
+    url: str = field()
+
+    def append(self, parent: Template) -> None:
+        if (request := get(self.url)):
+            parent.lookup[self.name] = request.text
+            return 
+
+        raise ValueError(f"Data could not be reached from. {self.url}")

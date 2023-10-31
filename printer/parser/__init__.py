@@ -4,7 +4,7 @@ from textwrap import dedent
 
 from lark import Transformer, v_args
 
-from ..nodes import Append, Node, SetVar, Struct, Template
+from ..nodes import Append, Node, Scrape, SetVar, Struct, Template
 
 __all__ = ("PrinterTransformer",)
 
@@ -31,12 +31,15 @@ class PrinterTransformer(Transformer):
             filename=filename,
             to_append=to_append,
         )
+    
+    def scrape(self, name: str, url: str) -> Scrape:
+        return Scrape(name=name, url=url)
 
     def template(self, name: str, path: str, *body: Node):
         template = Template(name=name, path=path, body=body)
 
         for node in template.body:
-            if isinstance(node, SetVar):
+            if isinstance(node, SetVar | Scrape):
                 node.append(template)
 
             elif isinstance(node, Struct | Append):

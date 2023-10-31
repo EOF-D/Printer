@@ -2,10 +2,12 @@ template: "@define(" CNAME ")" "-> [" STRING "]" [stmt+]
 stmt: struct
     | append
     | set_var
+    | scrape
 
 struct: "@struct(" [_cs_list{STRING}] ")"
 append: "@filetype(" CNAME ")" "-> " CNAME "(" CNAME ")" "= {" [_cs_list{CNAME}] "}"
 set_var: CNAME "= {" ANY "}"
+scrape: CNAME "=" STRING
 
 ANY: /[^{}]+/
 _cs_list{item}: item [("," item)* | (", " item)*] ","?
